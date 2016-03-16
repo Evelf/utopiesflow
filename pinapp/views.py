@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import DetailView, ListView
+from pinapp.models import Board
 
-# Create your views here.
+
+class BoardList(ListView):
+    model = Board
+
+
+class BoardDetail(DetailView):
+    model = Board

@@ -9,7 +9,6 @@ from django.test import TestCase
 from pinapp.management.commands.pin_import import Command as PinImportCommand
 from pinapp.models import Board, Pin
 
-# Create your tests here.
 
 class TestCommands(TestCase):
 
@@ -23,7 +22,9 @@ class TestCommands(TestCase):
             body=body, content_type="application/json")
 
         data = json.loads(body)['data']
-        mock_image_filename = os.path.join(os.path.dirname(__file__), 'fee.png')
+        mock_image_filename = os.path.join(
+            os.path.dirname(__file__), 'fee.png'
+        )
         with open(mock_image_filename) as f:
             image = f.read()
         for pin_data in data:
@@ -52,4 +53,3 @@ class TestCommands(TestCase):
 
         assert Pin.objects.count() == 10
         assert Board.objects.count() == 4
-

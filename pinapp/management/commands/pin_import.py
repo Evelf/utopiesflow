@@ -6,7 +6,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.core.files.base import ContentFile
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.utils import timezone
 from django.utils.http import urlencode
 
@@ -24,7 +24,8 @@ class Command(BaseCommand):
             'limit': 10,
             'fields': 'id,created_at,url,link,note,image,color,board',
         }
-        return "%s%s?%s" % (settings.PINAPP_BASE_URL, 'pins/', urlencode(params))
+        return "%s%s?%s" % (
+            settings.PINAPP_BASE_URL, 'pins/', urlencode(params))
 
     def handle(self, *args, **options):
         res = requests.get(self.get_url())
@@ -32,7 +33,9 @@ class Command(BaseCommand):
             self.stdout.write("%s: %s" % ('KO', res.status_code))
         else:
             data = json.loads(res.content)['data']
-            page = json.loads(res.content)['page']
+            # self.stdout.write(repr(data))
+            # TODO: use the next field
+            # page = json.loads(res.content)['page']
             for pin_data in data:
                 board_defaults = {
                     'name': pin_data['board']['name'],
@@ -64,8 +67,8 @@ class Command(BaseCommand):
                     pin.__dict__.update(pin_defaults)
                     pin.save()
                 else:
-                    res_img = requests.get(pin_data['image']['original']['url'])
+                    res_img = requests.get(
+                        pin_data['image']['original']['url'])
                     ext = splitext(pin_data['image']['original']['url'])[1]
                     img_name = "%s%s" % (pin_data['id'], ext)
                     pin.image.save(img_name, ContentFile(res_img.content))
-      #      self.stdout.write(res.content)

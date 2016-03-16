@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Boards</h2>
+    <ul>
+        {% for board in object_list %}
+            <li><a href="{% url 'board' board.pk %}">{{ board.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
