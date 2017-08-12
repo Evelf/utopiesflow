@@ -1,10 +1,53 @@
-{% extends "base.html" %}
+{% load staticfiles %}
+<html>
 
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static "style.css" %}" />
+</head>
+
+<body>
 {% block content %}
-    <h2>{{ object.name }}</h2>
-    <ul>
-        {% for pin in object.pin_set.all %}
-            <li><img src="{{ pin.image.url }}" /></li>
-        {% endfor %}
-    </ul>
+<h2><a href="{% url "index" %}">Boards</a> > {{ object.name }}</h2>
+
+<div class="pagination">
+  <span class="step-links">
+  {% if page_pins.has_previous %}
+    <a href="?page={{ page_pins.previous_page_number }}">previous</a>
+  {% endif %}
+    <span class="current">
+      Page {{ page_pins.number }} of {{ page_pins.paginator.num_pages }}
+    </span>
+  {% if page_pins.has_next %}
+    <a href="?page={{ page_pins.next_page_number }}">next</a>
+  {% endif %}
+  </span>
+</div>
+
+<div class="pinGridWrapper">
+  <div class="pinGrid">
+  {% for pin in page_pins %}
+    <div class="pin">
+      <img src="{{ pin.image.url }}" />
+      <p>{{ pin.note }}</p>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+
+<div class="pagination">
+  <span class="step-links">
+  {% if page_pins.has_previous %}
+    <a href="?page={{ page_pins.previous_page_number }}">previous</a>
+  {% endif %}
+    <span class="current">
+      Page {{ page_pins.number }} of {{ page_pins.paginator.num_pages }}
+    </span>
+  {% if page_pins.has_next %}
+    <a href="?page={{ page_pins.next_page_number }}">next</a>
+  {% endif %}
+  </span>
+</div>
+
 {% endblock %}
+</body>
+</html>

@@ -1,6 +1,7 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -40,16 +41,25 @@ class Pin(models.Model):
         'Board', models.SET_NULL, blank=True, null=True,
         help_text='The board that the Pin is on.',
     )
+    media_type = models.CharField(  # API field: media
+        max_length=5,
+        help_text='The media type of the Pin (image or video).',
+    )
+    video_data = JSONField(  # API field: attribution
+        default={},
+        help_text='The source data for videos, including the title, URL,'
+                  ' provider, author name, author URL and provider name.',
+    )
+    metadata = JSONField(  # API field: metadat
+        default={},
+        help_text='Extra information about the Pin for Rich Pins. Includes the'
+                  ' Pin type (e.g., article, recipe) and related information'
+                  ' (e.g., ingredients, author).'
+    )
     # creator map<string,string> The first and last name, ID and profile URL
     #   of the user who created the board.
     # counts map<string,i32>     The Pin’s stats, including the number of
     #   repins, comments and likes.
-    # media map<string,string>  The media type of the Pin (image or video).
-    # attribution map<string,string>  The source data for videos, including
-    #   the title, URL, provider, author name, author URL and provider name.
-    # metadata map<string,object> Extra information about the Pin for Rich
-    #   Pins. Includes the Pin type (e.g., article, recipe) and related
-    #   information (e.g., ingredients, author).
 
     def __str__(self):
         return self.pin_id
