@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles contrast_color %}
 <html>
 
 <head>
@@ -26,9 +26,9 @@
 <div class="pinGridWrapper">
   <div class="pinGrid">
   {% for pin in page_pins %}
-    <div class="pin">
+    <div class="pin pin_{{ pin.id }}" style="background-color:{{ pin.color }};">
       <img src="{{ pin.image.url }}" />
-      <p>{{ pin.note }}</p>
+      <p style="color:{{ pin.color|contrast_color }};">{{ pin.id }} - {{ pin.note }}</p>
     </div>
   {% endfor %}
   </div>

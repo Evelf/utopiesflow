@@ -30,8 +30,10 @@ class APITools(object):
         pin_date = datetime.strptime(
             pin_data['created_at'],
             '%Y-%m-%dT%H:%M:%S')
+        pin_date = pin_date.replace(tzinfo=timezone.utc)
         pin_defaults = {
-            'created_at': pin_date.replace(tzinfo=timezone.utc),
+            'sync_at': datetime.now(timezone.utc),
+            'created_at': pin_date,
             'pin_url': pin_data['url'],
             'source_url': pin_data['link'],
             'note': pin_data['note'],
@@ -52,6 +54,7 @@ class APITools(object):
         if created or override_image:
             image_url = pin_data['image']['original']['url']
             APITools.override_image(pin, image_url)
+        return pin_date
 
     @classmethod
     def override_image(cls, pin, image_url):

@@ -14,6 +14,8 @@ class Pin(models.Model):
                   ' the Pin on Pinterest.')
     created_at = models.DateTimeField(  # API field: created_at
         'created at', help_text='The date the Pin was created.')
+    sync_at = models.DateTimeField(
+        'synchronized at', help_text='The date the Pin was synchronized.')
     # TODO: make an other table for urls.
     pin_url = models.CharField(  # API field: url
         max_length=250,
