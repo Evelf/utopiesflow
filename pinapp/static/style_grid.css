@@ -10,31 +10,17 @@ html {
 	.pinGrid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill,minmax(calc(8rem + 5vw + 5vh),1fr));
-		grid-gap: 2.5vmin;
-		padding: 2.5vmin;
+		grid-gap: 15px;
+		padding: 15px;
+    /*
+		grid-auto-rows: 1px;
+		grid-auto-flow: row;
+    */
+		grid-auto-rows: repeat(auto-fill);
 		grid-auto-flow: dense;
-	}
-	div.pin:first-child {
-		grid-row-start: span 3;
-		grid-column-start: span 3;  
-	}
-	div.pin:nth-child(2n+3) {
-		grid-row-start: span 3;
-	}
-	div.pin:nth-child(4n+5) {
-		grid-column-start: span 2;
-		grid-row-start: span 2;
-	}
-	div.pin:nth-child(6n+7) {
-		grid-row-start: span 2;
-	}
-	div.pin:nth-child(8n+9) {
-		grid-column-start: span 2;
-		grid-row-start: span 3;
 	}
 	img {
 		width: 100%;
-		height: 100%;
 		display: block;
 		object-fit: cover;
 		box-shadow: 0 0 3px #496b7b;
@@ -43,33 +29,17 @@ html {
   div.pin {
     counter-increment: numImg;
   }
-  div.pin::after {
-    background: rgba(0,0,0,.5);
-    content: counter(numImg);
-    position: absolute;
-    top: 0%;
-    left: 0;
-    font-size: 2rem;
-    color: #c6d9d3;
-    width: 4rem;
-    height: 4rem;
-    line-height: 4rem;
-    text-align: center;
+
+  div.pin_7645, div.pin_7651, div.pin_7669, div.pin_7651 {
+    grid-row: span 2;
   }
+  div.pin_7637, div.pin_7638, div.pin_7656, div.pin_7656 {
+    grid-row: span 5;
+  }
+
+  div.pin_7742, div.pin_7694, div.pin_7699 {
+    grid-column: span 2;
+  }
+
 }
 
-div.pin,
-img {
-    transition: .4s;
-}
-.pin p {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 4rem;
-    padding: 1.3rem 1rem 1rem 4.5rem;
-    font-weight: 100;
-    line-height: 1.5;
-    color: #fff;
-}
