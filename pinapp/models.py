@@ -26,9 +26,17 @@ class Pin(models.Model):
         max_length=250,
         help_text='The URL of the webpage where the Pin was'
                   ' created. Should be more than 2000 to be sure.')
+    true_source_url = models.CharField(
+        max_length=2000,
+        null=True,
+        help_text='The true URL of the webpage where the Pin was'
+                  ' created. Should be more than 2000 to be sure.')
     note = models.TextField(  # API field: note
         default='',
-        help_text='The user-entered description of the Pin.')
+        help_text='The pinterest user-entered description of the Pin.')
+    local_note = models.TextField(
+        default='',
+        help_text='The local user-entered description of the Pin.')
     image = models.ImageField(  # API field: image
         upload_to='pinpics', height_field=None, width_field=None,
         max_length=100,
@@ -65,6 +73,10 @@ class Pin(models.Model):
 
     def __str__(self):
         return self.pin_id
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('pin', args=[str(self.id)])
 
 
 @python_2_unicode_compatible  # only if you need to support Python 2

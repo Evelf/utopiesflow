@@ -7,7 +7,7 @@
 
 <body>
 {% block content %}
-<h2><a href="{% url "index" %}">Boards</a> > {{ object.name }}</h2>
+<h2><a href="{% url "index" %}">Tableaux</a> > {{ object.name }}</h2>
 
 <div class="pagination">
   <span class="step-links">
@@ -28,7 +28,16 @@
   {% for pin in page_pins %}
     <div class="pin pin_{{ pin.id }}" style="background-color:{{ pin.color }};">
       <img src="{{ pin.image.url }}" />
-      <p style="color:{{ pin.color|contrast_color }};">{{ pin.id }} - {{ pin.note }}</p>
+      <p style="color:{{ pin.color|contrast_color }};">
+        {% if pin.local_note %}
+          {{ pin.local_note }}
+        {% else %}
+          {{ pin.note }} [from pinterest]
+        {% endif %}
+      </p>
+      <p style="color:{{ pin.color|contrast_color }};">
+        <a href="{% url "pin" pin.id %}">{{ pin.id }}</a> - <a href="{{ pin.pin_url }}">pinterest</a>{% if pin.source_url %} - <a href="{{ pin.source_url }}">source</a>{% endif %}
+      </p>
     </div>
   {% endfor %}
   </div>

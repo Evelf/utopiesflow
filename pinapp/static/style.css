@@ -1,5 +1,5 @@
 html {
-  background-color: #eee;
+  background-color: #fff;
 }
 
 .pagination {
@@ -12,21 +12,26 @@ html {
 }
 
 .pinGridWrapper {
-	width: 98%;
+	width: 95%;
 	margin: auto;
 }
 
 .pinGrid {
 	column-count: 2;
-	column-gap: 15px;
+	column-gap: 20px;
 }
 
 .pin {
-	display: inline-block;
 	background: #fff;
 	border-radius: 10px;
 	box-shadow: 0 6px 6px -6px #ccc;
-	margin: 0 0 15px;
+	margin: 0 auto;
+	max-width: 590px;
+}
+
+.pinGrid .pin {
+	display: inline-block;
+	margin: 0 0 20px;
 	column-break-inside: avoid;
 	width: 260px;
 	max-width: 100%;
@@ -43,6 +48,8 @@ html {
 	border-bottom: 1px solid #ccc;
 }
 .pin p {
+	font-size: 0.9em;
+	margin: 0;
 	padding: 10px;
 	color: #333;
 }

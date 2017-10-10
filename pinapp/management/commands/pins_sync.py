@@ -33,7 +33,7 @@ class Command(BaseCommand):
     def get_url(cls, cursor=None, limit=None):
         params = {
             'access_token': settings.PINAPP_ACCESS_TOKEN,
-            'limit': 5,
+            'limit': 50,
             'fields': APITools.api_fields()
         }
         if cursor:

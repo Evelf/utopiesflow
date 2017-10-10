@@ -120,6 +120,7 @@ MEDIA_URL = '/media/'
 
 PINAPP_BASE_URL = 'https://api.pinterest.com/v1'
 PINAPP_ACCESS_TOKEN = ''
+BROWSER_SESSION_FILE = ''
 
 try:
     from local_settings import *  # noqa
