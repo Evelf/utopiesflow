@@ -1,2 +1,26 @@
+{% load staticfiles %}
+<html>
+<head>
+
+  <link rel="stylesheet" type="text/css" href="{% static "style.css" %}" />
+
+</head>
+<body>
+
+{% block user_info %}
+<div class="user_info" >
+  {% if user.is_authenticated %}
+    {{ user.username }} - <a href="{% url 'logout' %}">logout</a>
+  {% else %}
+    <a href="{% url 'login' %}">login</a>
+  {% endif %}
+</div>
+{% endblock %}
+
+<h1>Utopies' flow</h1>
+
 {% block content %}
 {% endblock %}
+
+</body>
+</html>

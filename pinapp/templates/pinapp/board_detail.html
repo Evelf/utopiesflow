@@ -1,11 +1,6 @@
+{% extends "base.html" %}
 {% load staticfiles contrast_color %}
-<html>
 
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static "style.css" %}" />
-</head>
-
-<body>
 {% block content %}
 <h2><a href="{% url "index" %}">Tableaux</a> > {{ object.name }}</h2>
 
@@ -58,5 +53,3 @@
 </div>
 
 {% endblock %}
-</body>
-</html>

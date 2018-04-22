@@ -1,12 +1,8 @@
+{% extends "base.html" %}
 {% load staticfiles contrast_color %}
-<html>
 
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static "style.css" %}" />
-</head>
-
-<body>
 {% block content %}
+
 <h2><a href="{% url "index" %}">Boards</a> > <a href="{% url "board" object.board.id %}">{{ object.board.name }}</a>  > {{ object.id }}</h2>
 
 <div class="pin pin_{{ pin.id }}" style="background-color:{{ pin.color }};">
@@ -24,5 +20,3 @@
 </div>
 
 {% endblock %}
-</body>
-</html>

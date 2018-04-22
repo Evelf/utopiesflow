@@ -1,11 +1,11 @@
 # coding: utf-8
 import json
 import os.path
-import responses
 
 from django.core.management import call_command
 from django.test import TestCase
 
+import responses
 from pinapp.management.commands.pin_import import Command as PinImportCommand
 from pinapp.models import Board, Pin
 

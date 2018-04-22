@@ -1,6 +1,7 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -81,6 +82,7 @@ class Pin(models.Model):
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class Board(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     board_id = models.CharField(  # API field: id
         max_length=50,
         help_text='The unique string of numbers and letters that identifies'

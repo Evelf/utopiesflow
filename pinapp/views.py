@@ -1,13 +1,21 @@
-from django.views.generic import DetailView, ListView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.views.generic import DetailView, ListView, UpdateView
+
 from pinapp.models import Board, Pin
 
 
-class BoardList(ListView):
+class BoardList(LoginRequiredMixin, ListView):
     model = Board
 
+    def get_context_data(self, **kwargs):
+        context = super(BoardList, self).get_context_data(**kwargs)
+        context['user'] = self.request.user
 
-class BoardDetail(DetailView):
+        return context
+
+
+class BoardDetail(LoginRequiredMixin, DetailView):
     model = Board
     paginate_by = 42
 
@@ -16,6 +24,7 @@ class BoardDetail(DetailView):
         pins = self.get_object().pin_set.order_by('-created_at').all()
         paginator = Paginator(pins, self.paginate_by)
         page = self.request.GET.get('page')
+        user = self.request.user
 
         try:
             page_pins = paginator.page(page)
@@ -27,10 +36,9 @@ class BoardDetail(DetailView):
         context['page_pins'] = page_pins
         return context
 
-class PinDetail(DetailView):
+class PinDetail(LoginRequiredMixin, DetailView):
     model = Pin
 
-class PinUpdate(UpdateView):
+class PinUpdate(LoginRequiredMixin, UpdateView):
     model = Pin
     fields = ['local_note']
-
