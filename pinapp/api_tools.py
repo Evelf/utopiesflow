@@ -1,8 +1,8 @@
 # coding: utf-8
-import requests
 from datetime import datetime
 from os.path import splitext
 
+import requests
 from django.core.files.base import ContentFile
 from django.utils import timezone
 

@@ -1,8 +1,8 @@
 # coding: utf-8
 import json
-import requests
 from datetime import datetime
 
+import requests
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils import timezone

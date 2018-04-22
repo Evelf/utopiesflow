@@ -1,9 +1,7 @@
 # coding: utf-8
 import matplotlib.colors as colors
 import wcag_contrast_ratio as contrast
-
 from django.template import Library
-
 
 register = Library()
 
@@ -22,4 +20,3 @@ def contrast_color(hex_color):
         return "#ffffff"
     else:
         return "#000000"
-     

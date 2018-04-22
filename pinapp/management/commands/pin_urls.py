@@ -2,16 +2,15 @@
 
 from __future__ import unicode_literals
 
-import requests
 import json
 import sqlite3
-
-from requests.exceptions import SSLError, TooManyRedirects
 from time import sleep
 
+import requests
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils.http import urlencode
+from requests.exceptions import SSLError, TooManyRedirects
 
 from pinapp.api_tools import APITools
 from pinapp.models import Pin
